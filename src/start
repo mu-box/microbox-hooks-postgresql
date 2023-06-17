@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # hookit is installed as a bundled app, so we need bundler to load it for us
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
@@ -11,9 +11,9 @@ require 'timeout'
 
 include Hooky::Postgresql
 
-if payload[:platform] == 'local'  
+if payload[:platform] == 'local'
   memcap = 128
-  user   = 'nanobox'
+  user   = 'microbox'
 else
   total_mem = `vmstat -s | grep 'total memory' | awk '{print $1}'`.to_i
   cgroup_mem = `cat /sys/fs/cgroup/memory/memory.limit_in_bytes`.to_i
@@ -56,15 +56,15 @@ end
 
 file '/etc/service/db/run' do
   mode 0755
-  content File.read("/opt/nanobox/hooks/files/postgresql-run")
+  content File.read("/opt/microbox/hooks/files/postgresql-run")
 end
 
 file '/etc/service/db/control/d' do
   mode 0755
   content <<-EOF
 #!/bin/bash
-if [[ -f /data/var/db/postgresql/postmaster.pid ]]; then
-  su gonano -c 'pg_ctl stop -w -D /data/var/db/postgresql -m f'
+if [[ -f /data/var/db/postgresql/postprimary.pid ]]; then
+  su gomicro -c 'pg_ctl stop -w -D /data/var/db/postgresql -m f'
 fi
 EOF
 end
@@ -90,7 +90,7 @@ check_for_ready()
 # Attach the IP if provided
 if payload[:ips]
   # set up persistance
-  file "/etc/nanoinit.d/eth00" do
+  file "/etc/microinit.d/eth00" do
     content <<-EOF
 #!/bin/bash
 case $1 in
@@ -117,12 +117,12 @@ EOF
   # bring up interface
   execute "bring up vip" do
     command <<-EOF
-      /etc/nanoinit.d/eth00 start
+      /etc/microinit.d/eth00 start
     EOF
   end
 end
 
-if Dir.exist? "/opt/nanobox/cron"
+if Dir.exist? "/opt/microbox/cron"
   directory '/etc/service/cron'
 
   hook_file '/etc/service/cron/run' do

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # hookit is installed as a bundled app, so we need bundler to load it for us
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
@@ -17,7 +17,7 @@ users = config[:users]
 plan = {
   redundant: false,
   horizontal: false,
-  user: 'nanobox',
+  user: 'microbox',
   users: users,
   ips: [:default],
   port: 5432,

@@ -26,7 +26,7 @@
     }
   ],
   "extra_path_dirs": [
-    "/data/var/home/gonano/bin",
+    "/data/var/home/gomicro/bin",
     "/var/tmp"
   ],
   "extra_steps": [
@@ -37,14 +37,14 @@
   ],
   "users": [
     {
-      "username": "nanobox",
+      "username": "microbox",
       "password": "password",
       "meta": {
         "privileges": [
           {
             "privilege": "ALL PRIVILEGES",
             "type": "DATABASE",
-            "on": "gonano",
+            "on": "gomicro",
             "grant": true
           }
         ],
@@ -57,8 +57,8 @@
   "env": {
     "APP_NAME": "slippery-sloth",
     "DATA_DB_HOST": "192.168.0.10",
-    "DATA_DB_USERS": "root gonano",
+    "DATA_DB_USERS": "root gomicro",
     "DATA_DB_ROOT_PW": "secret",
-    "DATA_DB_GONANO_PW": "less-secret"
+    "DATA_DB_GOMICRO_PW": "less-secret"
   }
 }

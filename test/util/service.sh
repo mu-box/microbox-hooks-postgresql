@@ -27,7 +27,7 @@ wait_for_listening() {
   do
     sleep 1
   done
-  until [ ! "$(docker exec ${container} bash -c "/data/bin/psql -U gonano -t -c 'SELECT * FROM pg_catalog.pg_tables;'")" = "psql: FATAL:  the database system is starting up" ]
+  until [ ! "$(docker exec ${container} bash -c "/data/bin/psql -U gomicro -t -c 'SELECT * FROM pg_catalog.pg_tables;'")" = "psql: FATAL:  the database system is starting up" ]
   do
     sleep 1
   done
@@ -54,10 +54,10 @@ insert_test_data() {
   port=$3
   key=$4
   data=$5
-  run docker exec ${container} bash -c "/data/bin/psql -U gonano -t -c 'CREATE TABLE IF NOT EXISTS test_table (id text, value text);'"
+  run docker exec ${container} bash -c "/data/bin/psql -U gomicro -t -c 'CREATE TABLE IF NOT EXISTS test_table (id text, value text);'"
   echo_lines
   [ "$status" -eq 0 ]
-  run docker exec ${container} bash -c "/data/bin/psql -U gonano -t -c 'INSERT INTO test_table VALUES ('\"'\"'${key}'\"'\"', '\"'\"'${data}'\"'\"');'"
+  run docker exec ${container} bash -c "/data/bin/psql -U gomicro -t -c 'INSERT INTO test_table VALUES ('\"'\"'${key}'\"'\"', '\"'\"'${data}'\"'\"');'"
   echo_lines
   [ "$status" -eq 0 ]
 }
@@ -68,7 +68,7 @@ update_test_data() {
   port=$3
   key=$4
   data=$5
-  run docker exec ${container} bash -c "/data/bin/psql -U gonano -t -c 'UPDATE test_table SET value = '\"'\"'${data}'\"'\"' WHERE id = '\"'\"'${key}'\"'\"';'"
+  run docker exec ${container} bash -c "/data/bin/psql -U gomicro -t -c 'UPDATE test_table SET value = '\"'\"'${data}'\"'\"' WHERE id = '\"'\"'${key}'\"'\"';'"
   echo_lines
   [ "$status" -eq 0 ]
 
@@ -81,7 +81,7 @@ verify_test_data() {
   port=$3
   key=$4
   data=$5
-  run docker exec ${container} bash -c "/data/bin/psql -U gonano -t -c 'SELECT value FROM test_table WHERE id = '\"'\"'${key}'\"'\"';'"
+  run docker exec ${container} bash -c "/data/bin/psql -U gomicro -t -c 'SELECT value FROM test_table WHERE id = '\"'\"'${key}'\"'\"';'"
   echo_lines
   count=$(echo ${lines[0]} | grep -c "$data")
   [ $count -eq 1 ]
@@ -92,17 +92,17 @@ verify_plan() {
   [ "${lines[0]}"  = "{" ]
   [ "${lines[1]}"  = "  \"redundant\": true," ]
   [ "${lines[2]}"  = "  \"horizontal\": false," ]
-  [ "${lines[3]}"  = "  \"user\": \"nanobox\"" ]
+  [ "${lines[3]}"  = "  \"user\": \"microbox\"" ]
   [ "${lines[4]}"  = "  \"users\": [" ]
   [ "${lines[5]}"  = "    {" ]
-  [ "${lines[6]}"  = "      \"username\": \"nanobox\"," ]
+  [ "${lines[6]}"  = "      \"username\": \"microbox\"," ]
   [ "${lines[7]}"  = "      \"meta\": {" ]
   [ "${lines[8]}"  = "        \"privileges\": [" ]
   [ "${lines[9]}"  = "          {" ]
   [ "${lines[10]}"  = "            \"privilege\": \"ALL PRIVILEGES\"," ]
   [ "${lines[11]}" = "            \"type\": \"DATABASE\"," ]
   [ "${lines[12]}" = "            \"column\": null," ]
-  [ "${lines[13]}" = "            \"on\": \"gonano\"," ]
+  [ "${lines[13]}" = "            \"on\": \"gomicro\"," ]
   [ "${lines[14]}" = "            \"with_grant\": true" ]
   [ "${lines[15]}" = "          }" ]
   [ "${lines[16]}" = "        ]," ]

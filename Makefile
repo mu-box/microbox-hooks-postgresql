@@ -16,12 +16,12 @@ test: $(addprefix test-,${VERSIONS})
 
 .PHONY: test-%
 
-test-%: nanobox/${SERVICE}-%
+test-%: mubox/${SERVICE}-%
 	stdbuf -oL test/run_all.sh $(subst test-,,$@)
 
-.PHONY: nanobox/${SERVICE}-%
+.PHONY: mubox/${SERVICE}-%
 
-nanobox/${SERVICE}-%:
+mubox/${SERVICE}-%:
 	docker pull $(subst -,:,$@) || (docker pull $(subst -,:,$@)-beta; docker tag $(subst -,:,$@)-beta $(subst -,:,$@))
 
 .PHONY: stable beta alpha

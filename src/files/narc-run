@@ -1,4 +1,4 @@
 #!/bin/sh -e
-export PATH="/opt/local/sbin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/gonano/sbin:/opt/gonano/bin"
+export PATH="/opt/local/sbin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/gomicro/sbin:/opt/gomicro/bin"
 
-exec /opt/gonano/bin/narcd /opt/gonano/etc/narc.conf
+exec /opt/gomicro/bin/narcd /opt/gomicro/etc/narc.conf

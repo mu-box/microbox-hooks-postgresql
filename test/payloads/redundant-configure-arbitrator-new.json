@@ -46,7 +46,7 @@
     }
   ],
   "extra_path_dirs": [
-    "/data/var/home/gonano/bin",
+    "/data/var/home/gomicro/bin",
     "/var/tmp"
   ],
   "extra_steps": [

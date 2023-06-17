@@ -1,5 +1,5 @@
 #!/bin/sh -e
 
-[ -d /var/log/gonano/<%= svc %> ] || mkdir -p /var/log/gonano/<%= svc %>
-cd /var/log/gonano/<%= svc %>
-exec svlogd -v -ttt /var/log/gonano/<%= svc %>
+[ -d /var/log/gomicro/<%= svc %> ] || mkdir -p /var/log/gomicro/<%= svc %>
+cd /var/log/gomicro/<%= svc %>
+exec svlogd -v -ttt /var/log/gomicro/<%= svc %>

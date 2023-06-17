@@ -1,1 +1,1 @@
-### nanobox-hooks-postgresql [![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-hooks-postgresql.svg?branch=master)](https://travis-ci.org/nanobox-io/nanobox-hooks-postgresql)
+### microbox-hooks-postgresql [![Build Status Image](https://github.com/mu-box/microbox-hooks-postgresql/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/mu-box/microbox-hooks-postgresql/actions)

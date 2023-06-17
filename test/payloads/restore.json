@@ -11,14 +11,14 @@
   },
   "users": [
     {
-      "username": "nanobox",
+      "username": "microbox",
       "password": "password",
       "meta": {
         "privileges": [
           {
             "privilege": "ALL PRIVILEGES",
             "type": "DATABASE",
-            "on": "gonano",
+            "on": "gomicro",
             "grant": true
           }
         ],

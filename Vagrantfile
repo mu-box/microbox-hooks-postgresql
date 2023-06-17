@@ -41,20 +41,20 @@ Vagrant.configure(2) do |config|
   # pull the build image to run tests in
   config.vm.provision "shell", inline: <<-SCRIPT
     echo "Pulling the build image"
-    docker pull nanobox/postgresql:9.3 || (docker pull nanobox/postgresql:9.3-beta; docker tag nanobox/postgresql:9.3-beta nanobox/postgresql:9.3)
-    docker pull nanobox/postgresql:9.4 || (docker pull nanobox/postgresql:9.4-beta; docker tag nanobox/postgresql:9.4-beta nanobox/postgresql:9.4)
-    docker pull nanobox/postgresql:9.5 || (docker pull nanobox/postgresql:9.5-beta; docker tag nanobox/postgresql:9.5-beta nanobox/postgresql:9.5)
-    docker pull nanobox/postgresql:9.6 || (docker pull nanobox/postgresql:9.6-beta; docker tag nanobox/postgresql:9.6-beta nanobox/postgresql:9.6)
+    docker pull mubox/postgresql:9.3 || (docker pull mubox/postgresql:9.3-beta; docker tag mubox/postgresql:9.3-beta mubox/postgresql:9.3)
+    docker pull mubox/postgresql:9.4 || (docker pull mubox/postgresql:9.4-beta; docker tag mubox/postgresql:9.4-beta mubox/postgresql:9.4)
+    docker pull mubox/postgresql:9.5 || (docker pull mubox/postgresql:9.5-beta; docker tag mubox/postgresql:9.5-beta mubox/postgresql:9.5)
+    docker pull mubox/postgresql:9.6 || (docker pull mubox/postgresql:9.6-beta; docker tag mubox/postgresql:9.6-beta mubox/postgresql:9.6)
   SCRIPT
 
   # create an adhoc network
   config.vm.provision "shell", inline: <<-SCRIPT
-    if [[ ! `docker network ls | grep nanobox` ]]; then
+    if [[ ! `docker network ls | grep microbox` ]]; then
       docker network create \
         --driver=bridge \
         --subnet=192.168.0.0/16 \
         --opt="com.docker.network.driver.mtu=1450" \
-        --opt="com.docker.network.bridge.name=redd0" nanobox
+        --opt="com.docker.network.bridge.name=redd0" microbox
     fi
   SCRIPT
 end

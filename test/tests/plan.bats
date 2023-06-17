@@ -15,17 +15,17 @@
 {
   "redundant": false,
   "horizontal": false,
-  "user": "nanobox",
+  "user": "microbox",
   "users": [
     {
-      "username": "nanobox",
+      "username": "microbox",
       "meta": {
         "privileges": [
           {
             "privilege": "ALL PRIVILEGES",
             "type": "DATABASE",
             "column": null,
-            "on": "gonano",
+            "on": "gomicro",
             "with_grant": true
           }
         ],

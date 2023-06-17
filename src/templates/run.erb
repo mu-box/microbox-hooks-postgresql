@@ -3,11 +3,11 @@
 # redirect stderr to stdout
 exec 2>&1
 
-export PATH="/data/sbin:/data/bin:/opt/gonano/sbin:/opt/gonano/bin:/opt/local/sbin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/data/sbin:/data/bin:/opt/gomicro/sbin:/opt/gomicro/bin:/opt/local/sbin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 <%
-if File.exist?('/data/etc/environment.d/nano-envs')
+if File.exist?('/data/etc/environment.d/micro-envs')
 # This will have lines like: "export DB1_HOST='192.168.0.17'"
-  vars = File.read('/data/etc/environment.d/nano-envs').split("\n")
+  vars = File.read('/data/etc/environment.d/micro-envs').split("\n")
   vars.each do |var|
 -%>
 <%= var %>
@@ -18,4 +18,4 @@ end
 
 sysctl -w kernel.sem="<%= semmsl %> <%= semmns %> <%= semopm %> <%= semmni %>"
 
-exec chpst -u gonano <%= exec %>
+exec chpst -u gomicro <%= exec %>

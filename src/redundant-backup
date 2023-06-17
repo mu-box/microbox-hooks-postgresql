@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # hookit is installed as a bundled app, so we need bundler to load it for us
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
@@ -9,7 +9,7 @@ require 'hookit/setup'
 
 execute "dump and upload to backup container" do
   command <<-EOF
-    bash -c '/data/bin/pg_dumpall -c -U gonano \
+    bash -c '/data/bin/pg_dumpall -c -U gomicro \
       | gzip \
         | tee >(md5sum | cut -f1 -d" " > /tmp/md5sum) \
           | ssh \

@@ -14,9 +14,9 @@ pg_port=5432
 # SmartOS REQUIRED - either 'primary', 'secondary', or 'monitor' (the cluster needs exactly one of each)
 role=<%= payload[:member][:role] == 'arbitrator' ? 'monitor' : payload[:member][:role] %>
 # the directory where node status information is stored
-status_dir=/home/gonano/.yoke/status
-# the command you would like to use to sync the data from this node to the other when this node is master
-sync_command=/opt/gonano/bin/rsync -ae "ssh -o StrictHostKeyChecking=no" --delete {{local_dir}} {{slave_ip}}:{{slave_dir}}
+status_dir=/home/gomicro/.yoke/status
+# the command you would like to use to sync the data from this node to the other when this node is primary
+sync_command=/opt/gomicro/bin/rsync -ae "ssh -o StrictHostKeyChecking=no" --delete {{local_dir}} {{slave_ip}}:{{slave_dir}}
 
 [vip]
 # Virtual Ip you would like to use

@@ -12,7 +12,7 @@ env:
 
 before_install:
   - docker version
-  - docker network create --driver=bridge --subnet=192.168.0.0/16 --opt="com.docker.network.driver.mtu=1450" --opt="com.docker.network.bridge.name=redd0" nanobox
+  - docker network create --driver=bridge --subnet=192.168.0.0/16 --opt="com.docker.network.driver.mtu=1450" --opt="com.docker.network.bridge.name=redd0" microbox
   - ifconfig
   - sudo -H pip install awscli
 
@@ -24,7 +24,7 @@ jobs:
     - stage: publish
       script:
         - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-        - 'if [ "$BRANCH" == "master" ]; 
+        - 'if [ "$BRANCH" == "main" ];
             then make;
-            curl -s -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "Travis-API-Version: 3" -H "Authorization: token ${TRAVIS_TOKEN}" -d "{\"request\":{\"branch\":\"master\"}}" https://api.travis-ci.org/repo/nanobox-io%2Fnanobox-docker-postgresql/requests; 
+            curl -s -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "Travis-API-Version: 3" -H "Authorization: token ${TRAVIS_TOKEN}" -d "{\"request\":{\"branch\":\"main\"}}" https://api.travis-ci.org/repo/mu-box%2Fmicrobox-docker-postgresql/requests;
           fi'

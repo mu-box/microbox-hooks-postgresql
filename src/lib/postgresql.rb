@@ -7,7 +7,7 @@ module Hooky
         :privilege => "ALL PRIVILEGES",
         :type => "DATABASE",
         :column => nil,
-        :on => "gonano",
+        :on => "gomicro",
         :with_grant => true
       }
     ]
@@ -21,7 +21,7 @@ module Hooky
 
     DEFAULT_USERS = [
       {
-        :username => "nanobox",
+        :username => "microbox",
         :meta => DEFAULT_META
       }
     ]
@@ -30,7 +30,7 @@ module Hooky
       privilege:    {type: :string, from: ["SELECT", "INSERT", "UPDATE", "DELETE", "TRUNCATE", "REFERENCES", "TRIGGER", "ALL", "ALL PRIVILEGES", "USAGE", "CREATE", "CONNECT", "TEMPORARY", "TEMP", "EXECUTE"], default: "SELECT"},
       type:         {type: :string, from: ["TABLE", "ALL TABLES IN SCHEMA", "SEQUENCE", "ALL SEQUENCES IN SCHEMA", "DATABASE", "FOREIGN DATA WRAPPER", "FOREIGN SERVER", "FUNCTION", "ALL FUNCTIONS IN SCHEMA", "LANGUAGE", "LARGE OBJECT", "SCHEMA", "TABLESPACE"], default: "DATABASE"},
       column:       {type: :string, default: nil},
-      on:           {type: :string, default: 'gonano'},
+      on:           {type: :string, default: 'gomicro'},
       with_grant:   {type: :on_off, default: false}
     }
 
@@ -40,7 +40,7 @@ module Hooky
     }
 
     USER_DEFAULTS = {
-      username:      {type: :string, default: 'gonano'},
+      username:      {type: :string, default: 'gomicro'},
       meta:          {type: :hash, template: USER_META_DEFAULTS, default: DEFAULT_META}
     }
 
@@ -74,7 +74,7 @@ module Hooky
       count = 0
       begin
         execute 'try connect' do
-          command "/data/bin/psql -U gonano -p #{port} postgres -c \"SELECT * FROM pg_catalog.pg_tables;\""
+          command "/data/bin/psql -U gomicro -p #{port} postgres -c \"SELECT * FROM pg_catalog.pg_tables;\""
           on_exit {|exit_status| raise Hookit::Error::UnexpectedExit if exit_status != 0 }
         end
       rescue

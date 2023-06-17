@@ -26,7 +26,7 @@
     }
   ],
   "extra_path_dirs": [
-    "/data/var/home/gonano/bin",
+    "/data/var/home/gomicro/bin",
     "/var/tmp"
   ],
   "extra_steps": [
@@ -43,14 +43,14 @@
   },
   "users": [
     {
-      "username": "nanobox",
+      "username": "microbox",
       "password": "password",
       "meta": {
         "privileges": [
           {
             "privilege": "ALL PRIVILEGES",
             "type": "DATABASE",
-            "on": "gonano",
+            "on": "gomicro",
             "grant": true
           }
         ],
